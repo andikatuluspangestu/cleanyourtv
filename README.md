@@ -1,118 +1,94 @@
-<p align="center">
-  <a href="https://cleanyour.tv"><img src="https://raw.githubusercontent.com/Gathin23/cleanyourtv/main/docs/banner.png" alt="CleanYourTV. Your TV, minus the ads." width="800"></a>
-</p>
+# cleanyourtv (Polytron Glass Edition)
 
-<p align="center">
-  <a href="https://cleanyour.tv">cleanyour.tv</a> ·
-  <a href="PROMPT.md">The prompt</a> ·
-  <a href="examples/">93 TV lists</a> ·
-  <a href="SHOWCASE.md">18 built on it</a> ·
-  <a href="https://x.com/gathint/status/2111379569030939102">The tweet</a>
-</p>
+**Your TV, minus the ads, with a frosted-glass home that changes from day to night.**
+A fork of [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv), the lightweight tvOS-style launcher and
+debloat kit for Android TV and Google TV, built and tested on a 1 GB Polytron 2K Android TV.
 
-<p align="center">
-  <a href="https://github.com/Gathin23/cleanyourtv/stargazers"><img src="https://img.shields.io/github/stars/Gathin23/cleanyourtv?style=flat&cacheSeconds=1800&color=cfffcf&labelColor=15181e" alt="Stars"></a>
-  <a href="https://github.com/Gathin23/cleanyourtv/pulls?q=is%3Amerged"><img src="https://img.shields.io/github/issues-pr-closed/Gathin23/cleanyourtv?style=flat&cacheSeconds=1800&label=merged%20PRs&color=cfffcf&labelColor=15181e" alt="Merged PRs"></a>
-  <a href="https://github.com/Gathin23/cleanyourtv/network/members"><img src="https://img.shields.io/github/forks/Gathin23/cleanyourtv?style=flat&cacheSeconds=1800&color=cfffcf&labelColor=15181e" alt="Forks"></a>
-  <a href="https://github.com/Gathin23/cleanyourtv/graphs/contributors"><img src="https://img.shields.io/github/contributors/Gathin23/cleanyourtv?style=flat&cacheSeconds=1800&color=cfffcf&labelColor=15181e" alt="Contributors"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-cfffcf?style=flat&labelColor=15181e" alt="MIT"></a>
-  <a href="https://buymeacoffee.com/gathint"><img src="https://img.shields.io/badge/support-%E2%9D%A4-ff5e8a?style=flat&labelColor=15181e" alt="Support, buy me a coffee"></a>
-</p>
+Listed in the upstream [SHOWCASE](https://github.com/Gathin23/cleanyourtv/blob/main/SHOWCASE.md) (#386). Everything
+the upstream launcher does still works here; this page covers what the fork adds. For the full manual (doing it by
+hand, restoring, troubleshooting, every supported TV) see the
+[upstream README](https://github.com/Gathin23/cleanyourtv#readme).
 
-<p align="center">
-  <a href="https://www.producthunt.com/products/cleanyourtv?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-cleanyourtv">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1286319&theme=dark">
-      <img alt="CleanYourTV on Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1286319&theme=light">
-    </picture>
-  </a>
-</p>
+Everything is reversible: debloat lists disable packages, and a restore script puts the stock launcher back.
 
-Strip the bloatware from any Android TV or Google TV over Wi-Fi, and replace the ad-filled home
-screen with a clean launcher that looks like an Apple TV. **No root, no cable, nothing uninstalled,
-and a one-line restore if you change your mind.**
+## Fork features
 
-<h3 align="center">93 TV models &nbsp;·&nbsp; 31 brands &nbsp;·&nbsp; 17 languages &nbsp;·&nbsp; 370 KB launcher</h3>
+- **Frosted-glass dock and pills.** With a wallpaper, the dock band and the top pills show a blurred copy of the
+  picture behind them, with a sheen along the top and a light rim, like macOS. Android 11 has no live blur, so the
+  wallpaper is blurred once, on a 160×90 copy, and drawn through a shader: nothing is recomputed per frame.
+- **Day and night wallpapers.** `wallpaper.jpg` by day, `wallpaper_night.jpg` from `night_from` to `night_until`
+  (18:00 to 06:00 by default), with a 1.5 s crossfade; the glass follows the picture. Wallpapers decode in full
+  colour, so night skies don't band.
+- **Icon-only top bar.** Four round glass pills: Inputs, Wi-Fi (its own icon when offline, Ethernet when wired),
+  Tools and Settings. The date and stats line get the room back.
+- **Tools menu.** *Reorder apps* (move any app into the first row to dock it) and *Recents*: the apps you used in the
+  last three days; OK opens one, hold OK closes it, and **Close all** ends every sideloaded app in the background
+  and tells you how much memory came back.
+- **Wi-Fi panel** instead of the system picker: current network, band, link speed, signal (in words and dBm), IP
+  address, a hint when the 5 GHz network is strong while the TV sits on 2.4 GHz, and the strongest networks nearby.
+  Android 10+ lets only system apps switch networks, so picking one opens the TV's Wi-Fi settings; hold OK on the
+  pill to go there directly.
+- **[`glass-night`](themes/glass-night/) theme**: a sunrise coast by day and an Icelandic aurora by night, both from
+  Wikimedia Commons, with the glass on.
+- **[Polytron 2K debloat list](examples/polytron-2k-hayward/debloat.txt)** for the Hisense/CVTE MediaTek board
+  behind it.
 
-<p align="center">
-  <sub><b>FEATURED IN</b></sub><br><br>
-  <a href="https://techcrunch.com/2026/10/19/people-are-using-ai-to-make-their-smart-tvs-dumb-again/"><img src="docs/press/techcrunch.png" height="34" alt="TechCrunch"></a>&nbsp;&nbsp;
-  <a href="https://mashable.com/tech/smart-tv-ads-claude-code-ai-cleanup"><img src="docs/press/mashable.png" height="34" alt="Mashable"></a>&nbsp;&nbsp;
-  <a href="https://itsfoss.com/news/debloat-smart-tv/"><img src="docs/press/itsfoss.png" height="34" alt="It's FOSS"></a>&nbsp;&nbsp;
-  <a href="https://techaeris.com/2026/10/18/android-tv-debloat-tvos-style-makeover/"><img src="docs/press/techaeris.png" height="34" alt="Techaeris"></a>&nbsp;&nbsp;
-  <a href="https://www.techtimes.co.uk/ai-smart-tv-bloatware-performance-fix-1809233"><img src="docs/press/techtimes.png" height="34" alt="Tech Times"></a>&nbsp;&nbsp;
-  <a href="https://tech.yahoo.com/ai/meta-ai/articles/developers-using-ai-strip-ads-185856468.html"><img src="docs/press/gadgetreview.png" height="34" alt="Gadget Review"></a>&nbsp;&nbsp;
-  <a href="https://techpp.com/2026/10/18/speed-up-android-tv-claude-code/"><img src="docs/press/techpp.png" height="34" alt="TechPP"></a>&nbsp;&nbsp;
-  <a href="https://www.frandroid.com/android/google-tv/3290159_google-tv-lent-et-envahi-par-les-pubs-le-projet-tv-vibehack-corrige-tout-ca-grace-a-lia-jai-tente-lexperience"><img src="docs/press/frandroid.png" height="34" alt="Frandroid"></a>&nbsp;&nbsp;
-  <a href="https://www.xboxygen.com/News/371393-sa-tv-xiaomi-affichait-des-pubs-partout-il-donne-son-modele-a-claude-code-qui-refait-toute-linterface"><img src="docs/press/xboxygen.png" height="34" alt="Xboxygen"></a>&nbsp;&nbsp;
-  <a href="https://itavisen.no/2026/10/19/vibekodet-bort-reklame-smart-tv/"><img src="docs/press/itavisen.png" height="34" alt="ITavisen"></a>&nbsp;&nbsp;
-  <a href="https://pplware.sapo.pt/inteligencia-artificial/nem-as-smart-tv-escaparam-a-febre-do-vibe-coding-a-televisao-a-medida-de-cada-utilizador/"><img src="docs/press/pplware.png" height="34" alt="Pplware"></a>&nbsp;&nbsp;
-  <a href="https://insmart.cz/android-tv-bez-reklam-ai-claude-code/"><img src="docs/press/insmart.png" height="34" alt="Insmart"></a>&nbsp;&nbsp;
-  <a href="https://inet.detik.com/consumer/d-8713172/kesal-tv-xiaomi-banyak-iklan-pria-ini-sulap-jadi-apple-tv-pakai-ai"><img src="docs/press/detikinet.png" height="34" alt="detikINET"></a>&nbsp;&nbsp;
-  <a href="https://www.iphonemod.net/clean-your-tv-android-tv-debloat-launcher.html"><img src="docs/press/iphonemod.png" height="34" alt="iPhoneMod"></a>
-</p>
+## Contributed upstream
 
+| Pull request | What | Status |
+|---|---|---|
+| [#386](https://github.com/Gathin23/cleanyourtv/pull/386) | This fork in SHOWCASE.md | Merged |
+| [#388](https://github.com/Gathin23/cleanyourtv/pull/388) | Polytron 2K Android TV debloat list | Open |
+| [#389](https://github.com/Gathin23/cleanyourtv/pull/389) | Optional night picture for themes (`wallpaper_night.jpg`), rebuilt on upstream's new wallpaper rotation | Open |
 
-![Before: stock Google TV home with a sponsored ad. After: the Clean Your TV launcher](docs/stock-vs-new-side.jpg)
-
-> Vibe coded my parents' TV this afternoon! It was showing a sponsored ad before you could even get
-> to Netflix. Gave Claude Code the model number, it found the TV on wifi, removed 25 Xiaomi packages
-> and wrote a new launcher. Looks like an Apple TV now lol.
->
-> [@gathint, 17 October 2026](https://x.com/gathint/status/2111379569030939102). The replies are where
-> most of the TV lists here came from. The repo was called tv-vibehack until the 19th; old links work.
-
-## How it works
-
-Android TVs have the same debug bridge as Android phones. Switch on USB debugging in the TV's
-developer options, allow your computer once, and the rest is standard Android tooling:
-
-1. **Back up** the list of installed packages and settings.
-2. **Disable** the manufacturer's telemetry, ad services, content rows and preloaded junk with
-   `pm disable-user`. Nothing is uninstalled, so a restore script can undo every step.
-3. **Install** a small native launcher and make it the default home screen.
-
-The bloat differs by brand, so the prompt has your coding assistant discover it on your TV and ask
-before touching anything you might use.
+The glass, the icon pills, Recents and the Wi-Fi panel stay in this fork: they change the default look and need
+permissions the reference launcher deliberately avoids (see [CONTRIBUTING](CONTRIBUTING.md)).
 
 ## Quick start
 
-You need a computer on the same Wi-Fi as the TV and a coding assistant with shell access.
-Suggested: Claude Code on [0G Private Computer](https://pc.0g.ai), one API key for 100+ models.
-Claude Code with an Anthropic plan, Codex or Gemini CLI work too.
+1. **On the TV:** Settings → Device Preferences → About → press OK on **Build** seven times → back →
+   Developer options → **USB debugging** on. Keep the TV on, on the same Wi-Fi as your computer.
+2. **On your computer:** open Claude Code (or another coding assistant with shell access) in a clone of this repo and
+   paste [`PROMPT.md`](PROMPT.md), filling in your TV model.
+3. Accept "Allow USB debugging?" on the TV, then answer the checklist: which apps you use, which go in the dock.
 
-| | |
-|---|---|
-| **1. On the TV** | Settings → Device Preferences → About → press OK on **Build** seven times → back → Developer options → **USB debugging** on. If you see a Network or ADB debugging toggle, turn that on too. Keep the TV on. |
-| **2. On your computer** | Paste [`PROMPT.md`](PROMPT.md) into your assistant and fill in your TV model. |
-| **3. Follow along** | Accept "Allow USB debugging?" on the TV, then answer the checklist: which apps you use, which four go in the dock, whether to keep the voice assistant, Chromecast and updates. |
+Or by hand, once the debloat is done:
 
-The assistant backs up, debloats, builds and installs the launcher, and checks each step with
-screenshots pulled from the TV. With this repo as context it takes about fifteen minutes.
+```bash
+TV_HOST=192.168.1.50 launcher/build-and-install.sh      # build, install, make it Home, grant usage access
+TV_HOST=192.168.1.50 tools/theme.sh themes/glass-night   # glass + day/night wallpapers, no rebuild
+```
 
-## What you get
+On Windows: `launcher\build-and-install.ps1 -TvHost 192.168.1.50` and `tools\theme.ps1 -TvHost 192.168.1.50 themes\glass-night`.
+Building needs JDK 17+ and Android SDK platform 34; see the upstream README for setup.
 
-- **A pitch-black home** with a dock of your four favourite apps in a rounded band, where Apple TV puts it.
-- **A top shelf** naming the focused app in large type, with an ambient glow in a colour taken from its artwork.
-- **The rest of your apps in a grid** that slides up when you press Down.
-- **One floating glass highlight** that springs from tile to tile. The focused tile lifts and shows its name.
-- **Three frosted buttons**: Inputs (HDMI ports under the names you gave them in the TV's settings, AV, Live TV), Wi-Fi or Ethernet with the network name, Settings.
-- **A greeting, a thin clock and the date** in [Outfit](https://fonts.google.com/specimen/Outfit), and a matching Clock screensaver. Set `show_stats` in config or a theme for one line under the clock: CPU, free memory and free storage. It stays off unless you turn it on, and it refreshes only while Home is on screen.
-- **Themes** that change colours, wallpaper, dock and columns without a rebuild, and **module cards** that let other apps plug a tile in, only with your say-so.
+## Theme keys added by this fork
 
-And a TV that stops working against you: no sponsored rows, no "Discover" nags, no analytics
-phoning home, no apps you never asked for.
+Set them in a theme's `config.json` and push it with `tools/theme.sh`; no rebuild.
 
-| | |
-|---|---|
-| ![The top shelf names the focused app over an ambient glow in its colour](docs/focus-2-up-netflix.png) | ![The Inputs popup: HDMI ports with what is connected, AV and Live TV](docs/inputs-menu.jpg) |
-| *Top shelf and ambient glow* | *Inputs: HDMI with connection state, AV, Live TV* |
-| ![The grid with the glass highlight on a tile and its name beneath](docs/focus-1-fancode.png) | ![The Clock screensaver: a thin clock drifting over the glow](docs/clock-screensaver.png) |
-| *The grid, one glass highlight, the tile's name* | *Clock screensaver, drifts so nothing burns in* |
-| ![The aurora theme: a wallpaper and tinted pills, pushed without a rebuild](docs/theme-aurora.jpg) | ![Six columns and a six-app dock from a theme's config.json](docs/theme-six-columns.jpg) |
-| *Aurora theme, pushed with `tools/theme.sh`* | *Six columns and a six-app dock, same launcher* |
+| Key | Type | Meaning |
+|---|---|---|
+| `dock_glass` | bool | Glass dock band and pills over the blurred wallpaper (`true` by default; only with a wallpaper) |
+| `night_from`, `night_until` | `HH:MM` | When `wallpaper_night.jpg` from the theme folder replaces `wallpaper.jpg`; 18:00 and 06:00 by default |
 
-## Supported TVs
+Keep wallpapers dark-ish, 1920×1080 and under about 300 KB. Many budget sets draw their UI at 1280×720
+(`wm size` tells you); a picture prepared at that size skips one resize on the TV and looks sharper.
+
+## Permissions and memory
+
+Like upstream: **no internet permission**, no background services, nothing phones home. The fork adds two
+permissions, both for Recents:
+
+- **Usage access** (`PACKAGE_USAGE_STATS`), to list recently used apps. Android TV has no screen to grant it, so
+  `build-and-install` runs `appops set com.gathin.tvhome GET_USAGE_STATS allow`. Without it Recents shows only
+  Close all.
+- **`KILL_BACKGROUND_PROCESSES`**, a normal permission, for Close all. It ends background processes only; a real
+  force-stop needs a system signature.
+
+On the Polytron (about 930 MB of RAM) Home sits around 75 MB with the glass and a wallpaper, and the stats line
+shows about 400 MB free after the debloat.
+
+## Supported TVs (lists from upstream)
 
 Anything running **Android TV** or **Google TV**. Samsung (Tizen) and LG (webOS) run different
 systems; see [SHOWCASE.md](SHOWCASE.md) for a webOS port. **Fire TV** takes the debloat half only,
@@ -163,7 +139,7 @@ Redmi · SANYO · Thomson · Toshiba Fire TV · Vu · JMGO, Portronics, Stellamo
 | Philips R8G Google TV (MOKA, whitefield, Realtek RTD2851F), US | Google TV 14 |
 | Philips Smart 4K TV (Skyworth, eleonas, MediaTek), India | Google TV 14 |
 | Portronics Beem 470 Smart LED Projector (Allwinner H713, 1 GB), India | Android 11 |
-| Polytron 2K (WLTV POLYTRON2K, hayward; Hisense/CVTE, MediaTek mt5867) | Android TV 11 |
+| Polytron 2K (WLTV POLYTRON2K, hayward; Hisense/CVTE board, MediaTek mt5867), Indonesia | Android TV 11 |
 | PRISM+ Q65 Ultra 2026 QLED 4K AI Google TV (R10G, PRISMPLUS_FFM, MOKA, Realtek RTD2875 SoC, RTD6748 platform) | Google TV 14 |
 | RCA AI PONT SA (Changhong, redwood, ISDB92RC; also sold as realme 40-inch) | Android 14 |
 | Redmi TV (MiTV-ANTL0, starwars) | Android 5.1.1 (not Android TV) |
@@ -231,186 +207,23 @@ Redmi · SANYO · Thomson · Toshiba Fire TV · Vu · JMGO, Portronics, Stellamo
 Your TV not here? The prompt discovers the bloat itself. Add your list afterwards and the next
 person with your model skips that step: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Doing it by hand
+## Tested on
 
-Everything the assistant does, you can run yourself. The tools need Python 3 and nothing else.
+| TV | Android | Notes |
+|---|---|---|
+| Polytron 2K (WLTV POLYTRON2K, hayward; Hisense/CVTE board, MediaTek mt5867), Indonesia | Android TV 11 (RTMA.250416.094) | 1 GB RAM, 1280×720 UI, decoders up to 1080p; stock `tvlauncher` and `setupwraith` both claim Home and are disabled by the installer; Home checked from inside apps and after a reboot |
 
-```bash
-python3 -m venv tools/venv && tools/venv/bin/pip install -r tools/requirements.txt
-export TV_HOST=192.168.1.50                                   # your TV's IP address
+## Status
 
-tools/venv/bin/python -I tools/tv.py --probe                 # model, Android version, firmware
-tools/venv/bin/python -I tools/tv.py 'pm list packages'      # one shell command on the TV
-tools/disable.sh examples/xiaomi-mi-tv-4a/debloat.txt        # apply a debloat list
-tools/restore.sh examples/xiaomi-mi-tv-4a/debloat.txt        # undo it, stock launcher back
-TV_HOST=192.168.1.50 launcher/build-and-install.sh           # build the launcher and make it Home
-tools/theme.sh themes/aurora                                 # push a theme; --reset removes it
-```
+This fork is based on upstream v2.4 (20 Oct 2026). Upstream has since added wallpaper collections, editing the dock
+from the TV and more; merging those in is on the list. Until then, for the newest upstream features use upstream
+directly and push the [`glass-night`](themes/glass-night/) theme for the day/night wallpapers once #389 lands.
 
-| Tool | What it does |
-|---|---|
-| [`tools/tv.py`](tools/tv.py) | Pure-Python ADB client: shell, batch, push, pull. Works where the stock `adb` binary is blocked. |
-| [`tools/b64push.py`](tools/b64push.py) | Uploads large files such as APKs in base64 chunks and verifies the checksum. |
-| [`tools/disable.sh`](tools/disable.sh), [`restore.sh`](tools/restore.sh) | Apply or undo a debloat list, the undo from the state recorded before the change. |
-| [`tools/recovery.py`](tools/recovery.py) | Writes the record `disable.sh` needs to undo itself, and prints the restore batch. |
-| [`tools/theme.sh`](tools/theme.sh) | Push a folder from [`themes/`](themes/) to the launcher and restart Home. |
-| [`launcher/build-and-install.sh`](launcher/build-and-install.sh) | Builds a shrunk release (about 370 KB), installs it, switches Home, and rolls back if Home does not land on it. |
+## Credits
 
-Debloat list paths passed to `disable.sh` and `restore.sh` are relative to the directory you run
-from, so your own lists can live outside the repository. Absolute paths also work.
+Launcher and tools: [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) by Gathin and contributors.
+Font: [Outfit](https://fonts.google.com/specimen/Outfit) under the OFL ([launcher/FONT-LICENSE-OFL.txt](launcher/FONT-LICENSE-OFL.txt)).
+Wallpapers in `themes/glass-night/` are from Wikimedia Commons under CC BY-SA 4.0, see
+[its CREDITS](themes/glass-night/CREDITS.md). Fork changes by [andikatuluspangestu](https://github.com/andikatuluspangestu).
 
-Every script has a PowerShell twin next to it. On Windows with Android Studio installed nothing
-else is needed:
-
-```powershell
-python -m venv tools\venv; tools\venv\Scripts\python.exe -m pip install -r tools\requirements.txt
-powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 192.168.1.50
-powershell -ExecutionPolicy Bypass -File tools\disable.ps1 -TvHost 192.168.1.50 examples\xiaomi-mi-tv-4a\debloat.txt
-```
-
-The install scripts ask the TV which launcher owns Home and only disable one they recognise
-(`tvlauncher` or `launcherx`); pass `STOCK_LAUNCHER=<package>` (`-StockLauncher`) to override, or
-`none` to leave it alone.
-
-## The launcher
-
-A small native Android TV app (`com.gathin.tvhome`, about 370 KB installed) in plain Java with
-AndroidX RecyclerView and nothing heavier. Built for sets with 1 GB of RAM: no live blur, no video, no
-network, no background services. It needs JDK 17 and Android SDK platform 34 to build; on macOS,
-`brew install openjdk@17 android-commandlinetools` and `sdkmanager "platforms;android-34" "build-tools;34.0.0"`. On Linux
-the install script finds `~/Android/Sdk` and the `java` on your PATH.
-
-- **Configure** in [`config.xml`](launcher/app/src/main/res/values/config.xml): dock order, hidden apps, the Live TV package, columns (tiles shrink from 5 up), rows under the dock, an optional VPN app for the network pill, and `reduced_motion` for TVs whose GPU cannot keep up.
-- **App library (optional):** enable `app_library` in config.xml or a theme to browse installed apps and add or remove Home shortcuts with the remote. See [the app library guide](docs/app-library.md).
-- **On-TV launcher settings:** click Settings for the TV's system settings, or hold OK on Settings and choose Launcher settings to set 4, 5, 6 or 7 apps per row, turn animations on or off, and opt into advanced effects. The advanced option adds tile lift, icon zoom and smooth ambient-colour transitions; it may use more memory. Use Follow theme to clear on-TV choices. Pushing or resetting a theme also clears them.
-- **Change the default home:** Launcher settings and the optional Default-home tile (`show_home_settings_shortcut`) open Android's home picker. Choose the original launcher to stop using CleanYourTV as Home, or CleanYourTV to return. The original launcher must be enabled. If the install script disabled it, use the restore script below first. Some TVs provide no home picker.
-- **Themes** set the same keys plus a background colour and a wallpaper from a `config.json` pushed to the TV, no rebuild. Five ship in [`themes/`](themes/), documented there.
-- **Glass and day/night** ([`glass-night`](themes/glass-night/)): with a wallpaper, the dock band and the top pills are frosted glass over a blurred copy of it (`dock_glass`), and an optional `wallpaper_night.jpg` takes over from `night_from` to `night_until` with a crossfade. The wallpaper is decoded in full colour so night skies do not band.
-- **Top bar**: four round icon pills, Inputs, Wi-Fi (its own icon offline, Ethernet when wired), Tools and Settings. **Tools** holds Reorder apps and **Recents**: apps used in the last three days, OK opens, hold OK closes one, Close all ends every sideloaded app in the background and shows how much memory came back (usage access is granted by the install script, since Android TV has no screen for it).
-- **Wi-Fi panel**: the Wi-Fi pill opens a panel with the current network, band, link speed, signal and IP, a hint when the 5 GHz network is strong while the TV sits on 2.4 GHz, and the networks nearby. Android 10+ lets only system apps switch networks, so choosing one (or Change network) opens the TV's Wi-Fi settings; hold OK on the pill to go there directly.
-- **Language** follows the TV: English, German, Spanish, Catalan, French, Russian, Serbian (Latin), Polish, Portuguese, Turkish, Arabic, Hebrew, Simplified Chinese, Traditional Chinese (Taiwan), Thai, Finnish, Vietnamese. Android 13+ can set it for the launcher alone: `tools/tv.py 'cmd locale set-app-locales com.gathin.tvhome --locales ca'`.
-  Hebrew places the menu buttons on the left and the date and clock on the right, with the greeting above the clock. The Clock screensaver right-aligns its date and time, and Hebrew dates include the month prefix ב (for example, 19 באוקטובר). Hebrew dock and app-grid rows start on the right, with matching left/right remote navigation. The Hebrew input selector places icons and labels on the right, status on the left, and aligns the dropdown with the Inputs button’s right edge. Other languages keep their original layouts.
-  Russian includes the module-card approval and management screens and the VPN-off badge.
-- **Module cards** let any TV app declare its own tile (label, caption, glow). The launcher asks you once per app, Keep hidden by default, and remembers the answer for that app's signing key and card name. Hold OK on Settings and choose Module cards to change your mind. How to make one: [`docs/modules.md`](docs/modules.md); the contract: [`docs/specs/card.md`](docs/specs/card.md).
-- **Clock screensaver**: a drifting clock over the glow, so nothing burns in. Pick "Clock" in the TV's screensaver settings, or over ADB:
-  `tools/tv.py 'settings put secure screensaver_components com.gathin.tvhome/.ClockDream; settings put secure screensaver_enabled 1'`
-- **Remote keys**: an optional accessibility service keeps the remote's Input button working on Google TV (`INPUT_KEY_SERVICE=1` at install), another fixes sticks whose Home key sends ALL_APPS and opens Settings from the remote's gear button, even one Android does not map (`HOME_KEY_SERVICE=1`, scancodes or keycodes in `config.xml`). With `settings_key_panel` the gear opens a [small quick settings panel](docs/quick-settings-panel.jpg) instead, over Home or any app: TV settings, Display, Network, Apps and Launcher settings.
-- **Navigation** is deliberate: Up and Down move one row, the top buttons never fall through to tiles and Down from them returns to the dock tile you came from, the last focused app is remembered, and installing or removing an app refreshes the tiles while Home is open.
-- **Artwork**: app banners load at xhdpi or better, so low-density TV UIs do not downsample them before the focus zoom.
-
-## Restoring your TV
-
-Before `tools/disable.sh` changes anything it writes down what the TV looked like: for every package
-in the list whether it was enabled, already disabled or not installed, which component owned Home,
-and the three animation scales. That record lives in `~/.cleanyourtv/`, one file per TV and list, and
-a second run of the same list keeps the first record instead of saving the cleaned-up state over it.
-If you added packages to the list since, that run adds them to the record before disabling them.
-
-Keep the list you applied. The restore script replays the record, so a package you had disabled
-yourself stays disabled and Home goes back to the component that owned it:
-
-```bash
-TV_HOST=192.168.1.50 tools/restore.sh examples/<your tv>/debloat.txt                                    # Android TV
-TV_HOST=192.168.1.50 tools/restore.sh examples/<your tv>/debloat.txt com.google.android.apps.tv.launcherx  # Google TV
-```
-
-The `stock launcher` argument is only a fallback: with a record, the launcher that actually owned Home
-is the one that gets it back, and the argument is used only when nothing answered HOME at the time
-or this project's launcher owned it. The stock launcher is enabled again either way, unless it was
-already disabled when the record was taken.
-Without a record (an older run, or a record you deleted) the script says so and falls back to
-enabling the whole list and resetting the scales to `1.0`, which is what it used to do.
-
-It leaves the new launcher installed (remove it from the TV's Settings → Apps if you want it gone)
-and does not know about packages you disabled outside the list. To switch back later, run the
-install script again; it works out which launcher to disable even when Home has fallen back to
-Android's chooser. If the TV is unreachable, its own
-Settings → Apps page can re-enable packages too.
-
-## When something goes wrong
-
-The full list of things that bit us is in [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md). The
-three that matter most:
-
-- **macOS blocks `adb connect`** ("No route to host") under Local Network privacy. `tools/tv.py` avoids the binary.
-- **Disable the stock launcher only after the new one is installed and running**, or Home lands on a factory test app. The install script orders this for you.
-- **On Google TV the setup wizard** (`com.google.android.tungsten.setupwraith`) can take Home and crash-loop the system after the stock launcher is disabled. Disable it too, and list it in your `debloat.txt` so restore brings it back. But check `dumpsys wifi | grep -o 'cname=[^ ]*'` first: if the Wi-Fi network was saved during setup it belongs to setupwraith, and disabling it deletes the network (re-join it in Settings first; `tools/disable.sh` skips setupwraith until you do). Stuck already? `tools/tv.py 'pm enable --user 0 com.google.android.apps.tv.launcherx'`.
-
-## Questions people ask
-
-**Is this safe? Can it brick the TV?** Nothing is flashed, rooted or deleted; packages are disabled
-in the user profile. The risk is disabling something the TV leans on, which is why lists are
-applied in small batches with a restore script ready. The TV's own Settings → Apps page can
-re-enable packages even without the tools.
-
-**What about firmware updates?** Most lists disable the update service, so updates arrive only when
-you re-enable it. If one lands, the worst case is a package coming back and you re-run the script.
-
-**Won't the apps break?** Streaming apps still update through the Play Store, which is left alone.
-The launcher just lists what is installed and launches it with intents that have been stable for a decade.
-
-**Can I do this for someone in another home?** Yes, over a private [Tailscale](https://tailscale.com)
-link instead of the same Wi-Fi: either Tailscale on their TV, shared with you, or a computer or Apple
-TV at their home routing to it. Never by opening the ADB port on their router. Step by step in
-[docs/REMOTE.md](docs/REMOTE.md).
-
-**Isn't ADB access a security hole?** It is one explicit "allow this computer" tap on the TV, the
-same as developing an Android app. Network ADB is plaintext on port 5555, and on firmware with
-`ro.adb.secure=0` any device on the LAN gets a shell, so close it when you are done:
-
-1. On the TV: Developer options → turn **USB debugging** and **Network/ADB debugging** off, and
-   revoke the USB debugging authorisations.
-2. Reboot the TV, then confirm the port is gone from your computer: `nc -vz <tv ip> 5555` must fail.
-
-The launcher keeps working without debugging.
-
-**Can it block ads inside apps too?** Partly, with Android's Private DNS (Android 9 and newer). Point
-it at an ad-blocking resolver such as [AdGuard DNS](https://adguard-dns.io) and every app's ad and
-tracker domains stop resolving, system-wide, surviving reboots. The trade-off: that resolver then
-sees every DNS query the TV makes.
-
-```bash
-tools/tv.py 'settings put global private_dns_specifier dns.adguard-dns.com'
-tools/tv.py 'settings put global private_dns_mode hostname'
-```
-
-It does not remove YouTube ads, which come from the same servers as the videos. If an app stops
-playing or the TV reports "No internet" (the resolver is down or unreachable), switch back with
-`tools/tv.py 'settings put global private_dns_mode opportunistic'`.
-
-**AirPlay?** Not from this repo. Chromecast built-in stays for Android phones. For iPhones,
-[jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server) works; an install
-script for it is in [PR #84](https://github.com/Gathin23/cleanyourtv/pull/84).
-
-**Can I just download the APK?** Build it with the one-line script; it takes a minute and you
-control what goes on your TV. No prebuilt binaries.
-
-## Contributing
-
-The most useful contribution is your TV's debloat list, so the next person with that model does
-not have to rediscover it. Launcher improvements and sharper prompt wording are welcome too.
-[CONTRIBUTING.md](CONTRIBUTING.md) has the format and the testing we ask for. Built something on
-top, a launcher, a port, a theme? Add it to [SHOWCASE.md](SHOWCASE.md), where eighteen projects already
-live: a webOS port for LG, a Stremio shelf, a Hisense restyle, Fire TV launchers, an AirPlay installer.
-
-The people whose work is in this repo:
-
-<a href="https://github.com/Gathin23/cleanyourtv/graphs/contributors"><img src="https://contrib.rocks/image?repo=Gathin23/cleanyourtv&columns=16" alt="Contributors"></a>
-
-<details>
-<summary><strong>Star history</strong></summary>
-
-<a href="https://star-history.com/#Gathin23/cleanyourtv&Date"><img src="https://api.star-history.com/svg?repos=Gathin23/cleanyourtv&type=Date" alt="Star history chart" width="640"></a>
-
-</details>
-
-## Contact
-
-Questions about your TV: [GitHub Discussions](https://github.com/Gathin23/cleanyourtv/discussions).
-Press and partnerships: [hello@itsgathin.com](mailto:hello@itsgathin.com).
-Security issues: report them privately through the [Security tab](https://github.com/Gathin23/cleanyourtv/security), see [`SECURITY.md`](SECURITY.md).
-
-## Licence
-
-MIT, see [`LICENSE`](LICENSE). The Outfit typeface is under the SIL Open Font License, see
-`launcher/FONT-LICENSE-OFL.txt`.
+MIT, see [LICENSE](LICENSE).
